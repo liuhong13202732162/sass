@@ -1,0 +1,196 @@
+@charset "UTF-8";
+//设置整个页面内外边距为0
+$margin:0 !default;
+$padding:0 !default;
+// 通用手机屏幕
+$phone: 750px;
+
+// PC
+$s-pc-max: 776px;
+@mixin zsy($devices){
+	@if $devices == phone{
+        @media only screen and (max-width: $phone){
+            @content;
+        }
+    }
+    @if $devices == s-pc{
+        @media only screen and (min-width: $s-pc-max){
+            @content;
+        }
+    }
+}
+html{
+   
+    @include zsy(phone){//手机样式
+        margin: $margin;
+        padding: $padding; 
+        background: {
+            image: url('../img/headerbg.jpg');
+            position: center;
+            repeat: no-repeat;
+            attachment: fixed;
+            size: cover; 
+        }
+        z-index: 1;
+        
+        
+    }
+    @include zsy(s-pc){//PC样式
+        margin: $margin;
+        padding: $padding; 
+        background: {
+            image: url('../img/headerbg.jpg');
+            position: center;
+            repeat: no-repeat;
+            attachment: fixed;
+            size: cover; 
+        }
+        z-index: 1;
+    }
+}
+
+@include zsy(phone){
+    .page-wrapper{
+        %pstyle {
+            width: 500px;
+            margin: 0 auto;
+        }
+        header{
+            text-align: center;
+            
+            h1{
+                text-shadow: 10px 1px 1px rgb(158, 166, 173);
+                font-size: 40px; 
+            }
+            h2{
+                font-size: 20px;
+            }
+          
+        }
+        @each $var in summary, preamble, explanation,explanation,participation,benefits,requirements{
+            .#{$var}{
+                
+                h3{
+                    text-align: center;
+                    font-size: 20px;  
+                }
+                p{
+                   @extend %pstyle;
+                }
+               
+            }
+            
+        }
+        footer{        
+            @extend %pstyle;
+        }
+        .sidebar{
+            @extend %pstyle;
+        }
+        
+    }
+    
+}
+
+/* PC屏幕 */
+@include zsy(s-pc){
+    .page-wrapper{
+        text-align: center;
+        h1{
+            text-shadow: 10px 1px 1px #83ACDB;
+            font-size: 50px; 
+        }
+        h2{
+            text-shadow: 1px 1px 1px #83ACDB;
+            font-size: 25px;
+        }
+    }
+    %commentStyle{
+        margin: 0 auto;
+        width: 1000px;
+        border: 2px solid rgb(229, 240, 128);
+        border-radius: 20px;
+        h3{
+            text-align: center;
+            text-shadow: 1px 1px 1px #83ACDB;
+            font-size: 25px;
+        }
+        p{
+            text-align: left;
+            font-size: 20px;
+            color: rgb(37, 36, 35);
+        }
+    }
+    .summary{
+        @extend %commentStyle;
+    }
+    
+    .preamble{
+        @extend %commentStyle;
+        margin-top: 400px;
+    }
+    
+    .explanation{
+        @extend %commentStyle;
+    }
+    
+    .participation{
+        @extend %commentStyle;
+    }
+    
+    .benefits{
+        @extend %commentStyle;
+    }
+    
+    .requirements{
+        @extend %commentStyle;
+    }
+    
+    .supporting footer{
+        position: relative;
+        top: 30px;
+        margin: 0 auto;
+        font-size: 15px;
+        text-shadow: 1px 1px 1px #83ACDB;
+        a{
+            color: rgb(141, 151, 179);
+            font-size: 30px;
+            padding: 40px 50px 50px 50px;
+            text-decoration: none;
+        }
+    }
+    
+    /* 右边 */
+    .wrapper{
+        display: flex;
+        width: 90%;
+        flex-direction: row;
+        justify-content: center;
+        position: absolute;
+        top: 350px;
+    
+        %rightStyle{
+            h3{
+                text-shadow: 1px 1px 1px #83ACDB;
+                font-size: 25px;
+            }
+            ul li{
+                font-size: 20px;
+            }
+        }
+
+        .design-selection{
+           justify-content: flex-start;
+           @extend %rightStyle;
+        }
+        .design-archives{
+            justify-content: center;
+            @extend %rightStyle;
+        }
+        .zen-resources {
+            justify-content: flex-end;
+            @extend %rightStyle; 
+        }       
+    }
+}
+
